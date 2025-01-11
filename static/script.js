@@ -1,63 +1,46 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const loadingDiv = document.querySelector('.loading');
-    const dotsDiv = document.getElementById('dots');
-  let recognition;
-    let audioPlayer = new Audio();
-     if('webkitSpeechRecognition' in window) {
+document.addEventListener("DOMContentLoaded", () => {
+   const startBtn = document.getElementById("start-btn");
+   const loadingDiv = document.querySelector(".loading");
+   const dotsDiv = document.getElementById("dots");
+   let audioPlayer = new Audio();
 
-        recognition = new webkitSpeechRecognition();
-        recognition.continuous = false;
-        recognition.lang = 'en-US';
+   const startAssistant = async () => {
+       try {
+           // Show loading animation
+           loadingDiv.style.display = "flex";
+           dotsDiv.style.display = "none";
 
-        recognition.onstart = () => {
-          console.log("Speech recognition started");
-          loadingDiv.style.display = 'flex';
-          dotsDiv.style.display = 'none';
-        };
-
-         recognition.onresult = (event) => {
-            const transcript = event.results[0][0].transcript;
-             fetch('/process_text', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json'
-              },
-             body: JSON.stringify({ text: transcript })
-          })
-          .then(response => response.json())
-          .then(data => {
-               console.log(data.response);
-               audioPlayer.src = 'data:audio/mp3;base64,' + data.audio;
-              audioPlayer.play();
-               loadingDiv.style.display = 'none';
-               dotsDiv.style.display = 'flex';
-          })
-        .catch(error => {
-               console.error('Error:', error);
-              loadingDiv.style.display = 'none';
-              dotsDiv.style.display = 'flex';
+           // Fetch response from server
+           const response = await fetch("/start_assistant", {
+               method: "POST",
+               headers: { "Content-Type": "application/json" },
            });
-       };
 
-     recognition.onerror = (event) => {
-        console.error("Speech Recognition Error:", event.error);
-        loadingDiv.style.display = 'none';
-         dotsDiv.style.display = 'flex';
-     };
+           if (!response.ok) {
+               throw new Error(`Server Error: ${response.statusText}`);
+           }
 
-  if(welcomeAudio) {
-        audioPlayer.src = 'data:audio/mp3;base64,' + welcomeAudio;
-        audioPlayer.play();
-   }
+           const data = await response.json();
+           console.log("AI Response:", data.response);
 
-  dotsDiv.addEventListener('click', () => {
-     loadingDiv.style.display = 'flex';
-     dotsDiv.style.display = 'none';
-       recognition.start();
-      });
+           if (data.audio) {
+               // Play the audio response
+               audioPlayer.src = "data:audio/mp3;base64," + data.audio;
+               await audioPlayer.play();
+               console.log("Audio playback started.");
+           } else {
+               // Show message if no audio is returned
+               alert(data.response || "No response received from the assistant.");
+           }
+       } catch (err) {
+           console.error("Error:", err.message);
+           alert("An error occurred while processing your request. Please try again.");
+       } finally {
+           // Reset UI
+           loadingDiv.style.display = "none";
+           dotsDiv.style.display = "flex";
+       }
+   };
 
-     } else {
-        loadingDiv.textContent = "Speech recognition is not supported in this browser."
-        dotsDiv.style.display = 'flex';
-    }
+   startBtn.addEventListener("click", startAssistant);
 });
