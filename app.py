@@ -10,9 +10,9 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Configure the Gemini and ElevenLabs API keys
-genai.configure(api_key="AIzaSyA_H5o_h9WhwD700WycZg7uhhK9G4pwzGU")
+genai.configure(api_key="Gemini_API_Key")
 model = genai.GenerativeModel('gemini-pro')
-elevenlabs_api_key = "sk_b2ef27a7f0f489b41e6130c9e77bf0a3d51f2ced468e7bf7"
+elevenlabs_api_key = "ElevenLabs_API_Key"
 client = ElevenLabs(api_key=elevenlabs_api_key)
 welcome_voice = None
 try:
