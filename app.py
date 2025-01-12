@@ -9,8 +9,8 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 # Configure APIs
-genai.configure(api_key="AIzaSyCegsY2kp1OVzWTx5Vdom1k0mJFOrWiits")  
-elevenlabs_api_key = "sk_2f09d95c42bd022daee83243a57ef05106d2e5597a40af4d"
+genai.configure(api_key="Gemini_API")  
+elevenlabs_api_key = "Eleven_Lab's_API"
 client = ElevenLabs(api_key=elevenlabs_api_key)
 
 # Voice ID for ElevenLabs
