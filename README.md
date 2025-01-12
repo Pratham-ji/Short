@@ -69,11 +69,3 @@ Follow these instructions to get the project running locally:
     *  Speak to the application
     *  Wait for audio output
    
-## License
-     MIT
-
-## Acknowledgments
-
-* Google's Gemini for providing robust Natural Language Processing AI service.
-* Google's Speech Recognition service to interpret user voice audio inputs.
-* Eleven Labs for fast generation of good quality voice AI responses.
