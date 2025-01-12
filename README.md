@@ -28,10 +28,10 @@ Follow these instructions to get the project running locally:
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/your-repository.git
-    cd your-repository
+    git clone https://github.com/Pratham-ji/Short.git
+    cd Short
     ```
-    _Replace `your-username/your-repository` with the appropriate repository url_
+   
 
 2.  **Create a virtual environment:** (Optional but highly recommended)
 
