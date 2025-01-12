@@ -59,7 +59,7 @@ Follow these instructions to get the project running locally:
 6.   **Start the application**
 
      ```bash
-    python app.py
+        python app.py
      ```
     
     You can now access the website in [http://127.0.0.1:5000/](http://127.0.0.1:5000/). Please enable the correct permission on your browser.
