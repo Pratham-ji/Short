@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short - AI Assistant</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
 </head>
 <body>
     <div id="app">
-        <!-- Button to start the assistant -->
+        <!-- Dots Animation -->
         <div id="dots">
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
             <span class="dot"></span>
         </div>
+
+        <!-- Invisible Button -->
         <button id="start-btn" class="cssbuttons-io-button">Start Assistant</button>
-        <div class="loading" style="display: none;">
+
+        <!-- Loader Animation -->
+        <div class="loading">
             <svg class="pl" width="240" height="240" viewBox="0 0 240 240">
                 <circle class="pl__ring pl__ring--a" cx="120" cy="120" r="105" fill="none" stroke="#f42f25"></circle>
                 <circle class="pl__ring pl__ring--b" cx="120" cy="120" r="35" fill="none" stroke="#f49725"></circle>
@@ -25,6 +30,6 @@
             </svg>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 </html>
